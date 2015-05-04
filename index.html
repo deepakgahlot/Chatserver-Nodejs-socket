@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>My Chat Application</title>
+    <style>
+        #chat {
+            background-color: #f6f0e2;
+            border-radius: 10px;
+            color:forestgreen;
+             font-style:italic;
+             padding-left:1.5%;
+        }
+
+        #mesage {
+            width: 400px;
+            height: 20px;          
+           
+        }
+
+        #sbmt {
+            border-radius: 5px;
+            width: 100px;
+            height: 30px;
+        }
+    </style>
+    <!--<script src="script/jquery-1.11.2.min.js"></script>-->
+    
+    <!--<script src="/node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>-->
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body style="background-color:#005387">
+    <span style="margin-top:-50%;padding-left:20px;color:white">Welcome to chat Application</span>
+    <div style="padding-left:20%;">
+        <textarea id="chat" rows="30" cols="80" readonly></textarea>
+
+        <br />
+        <br />
+        <form id="myform">
+            <input type="text" id="mesage" placeholder="type message here-:)" />
+            <button type="submit" style="background-color:blue;color:white" id="sbmt">Enter</button>
+        </form>
+    </div>
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>  
+    <!--<script src="/node_modules/socket.io/socket.io.js"></script>-->
+    <script>
+        jQuery(function ($) {
+            var socket = io.connect();
+            var $messageform = $('#myform');
+            var $messagebox = $('#mesage');
+            var $chat = $('#chat');
+            $messageform.submit(function (e) {
+                e.preventDefault();
+                socket.emit('send message', $messagebox.val());
+                $messagebox.val('');
+            });
+            socket.on('new meaasge', function (data) {
+                $chat.append(data + '\n')
+            });
+        });
+    </script>
+</body>
+</html>

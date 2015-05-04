@@ -1,0 +1,15 @@
+﻿{
+  "name": "ChatServer",
+  "version": "0.0.0",
+  "description": "ChatServer",
+  "main": "app.js",
+  "private": "true",
+  "dependencies": {
+   "socket.io": "1.3.5",
+    "express": "4.12.3"
+  },
+  "author": {
+    "name": "deepak.gahlot",
+    "email": ""
+  }
+}
